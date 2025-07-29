@@ -1,0 +1,49 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Checking out source code...'
+                // git 'https://your-repo-url.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Building the project...'
+                // For example: sh 'make build' or 'npm install'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                // For example: sh 'pytest tests/' or 'npm test'
+                sh '''
+                    echo "Test case 1 passed"
+                    echo "Test case 2 passed"
+                '''
+            }
+        }
+
+        stage('Post Results') {
+            steps {
+                echo 'Posting results or sending notifications...'
+                // For example: JUnit report, email, Slack, etc.
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline finished.'
+        }
+        success {
+            echo 'All stages passed successfully.'
+        }
+        failure {
+            echo 'Pipeline failed.'
+        }
+    }
+}
