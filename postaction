@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building the app...'
+                // Simulate failure: sh 'exit 1'
+            }
+            post {
+                success {
+                    echo 'Build stage succeeded.'
+                }
+                failure {
+                    echo 'Build stage failed.'
+                }
+                always {
+                    echo 'This runs after the Build stage, regardless of result.'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+            }
+            post {
+                always {
+                    echo 'Test stage cleanup or logging.'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline finished.'
+        }
+    }
+}
