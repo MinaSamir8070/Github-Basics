@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Update system
+sudo yum update -y
+
+# Install Java JDK (Amazon Corretto or OpenJDK)
+sudo yum install java-11-amazon-corretto -y
+
+# Install required packages
+sudo yum install -y yum-utils device-mapper-persistent-data lvm2 curl
+
+# Add Docker repository
+sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+# Install Docker
+sudo yum install docker-ce docker-ce-cli containerd.io -y
+
+# Start and enable Docker
+sudo systemctl start docker
+sudo systemctl enable docker
+
+# Install Docker Compose (version 1.27.4 like your original script)
+sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+# Make it executable
+sudo chmod +x /usr/local/bin/docker-compose
+
+# Add ec2-user (or your user) to docker group
+sudo usermod -aG docker ec2-user
+
+echo "Installation Complete. You may need to logout and login again for docker group changes to apply."
