@@ -3,8 +3,8 @@
 # Update system
 sudo yum update -y
 
-# Install Java JDK (Amazon Corretto or OpenJDK)
-sudo yum install java-11-amazon-corretto -y
+# Install Java 17 (Amazon Corretto)
+sudo yum install java-17-amazon-corretto -y
 
 # Install required packages
 sudo yum install -y yum-utils device-mapper-persistent-data lvm2 curl
@@ -25,7 +25,7 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-
 # Make it executable
 sudo chmod +x /usr/local/bin/docker-compose
 
-# Add ec2-user (or your user) to docker group
+# Add ec2-user to docker group (change if using a different user)
 sudo usermod -aG docker ec2-user
 
-echo "Installation Complete. You may need to logout and login again for docker group changes to apply."
+echo "✅ Installation Complete. You may need to logout and login again for docker group changes to apply."
